@@ -25,5 +25,5 @@ export const authenticators = pgTable(
     primaryKey({
       columns: [authenticator.userId, authenticator.credentialID],
     }),
-  ]
+  ],
 );
