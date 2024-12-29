@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Nextjs-boilerplate",
-  description: "this is a Nextjs-15  boilerplate",
+  description: "This is a Nextjs-15 boilerplate",
 };
 
 export default function RootLayout({

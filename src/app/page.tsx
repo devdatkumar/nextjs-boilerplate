@@ -1,3 +1,6 @@
-export default function Home() {
-  return <></>;
+import { auth } from "@/auth";
+
+export default async function Home() {
+  const session = await auth();
+  return <>{session?.user.email}</>;
 }
