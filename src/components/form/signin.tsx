@@ -14,12 +14,40 @@ import {
   EyeClosed,
   LoaderPinwheel,
   LogIn,
+  UserRoundCheck,
 } from "lucide-react";
-import { signinAction, oauthAction } from "@/actions/signinAction";
+import { signinAction, oauthAction } from "@/actions/auth/signin";
+import { signinSchema } from "@/lib/types/auth";
+
+type FieldError = {
+  email?: string[] | undefined;
+  password?: string[] | undefined;
+};
 
 export default function SigninForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState({ email: "", password: "" });
+  const [error, setError] = useState<FieldError | undefined>({});
   const [state, dispatch, isPending] = useActionState(signinAction, undefined);
+
+  const handleAction = (formData: FormData) => {
+    const validationResult = signinSchema.safeParse(
+      Object.fromEntries(formData),
+    );
+
+    if (!validationResult.success) {
+      setError(validationResult.error.flatten().fieldErrors);
+      setUser({
+        email: formData.get("email")?.toString() ?? "",
+        password: formData.get("password")?.toString() ?? "",
+      });
+      return;
+    }
+
+    setError({});
+    dispatch(formData);
+    setUser({ email: "", password: "" });
+  };
 
   return (
     <Card>
@@ -28,7 +56,7 @@ export default function SigninForm() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-6">
-          <Form action={dispatch}>
+          <Form action={handleAction}>
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -38,13 +66,13 @@ export default function SigninForm() {
                   type="email"
                   autoComplete="email"
                   placeholder="example@email.com"
-                  defaultValue={state?.formData?.get("email")?.toString() ?? ""}
+                  defaultValue={user.email}
                   disabled={isPending}
                   required
                 />
-                {state?.fieldError?.email && (
+                {error?.email && (
                   <ul className="text-red-500 text-sm">
-                    {state.fieldError.email.map((error, index) => (
+                    {error.email.map((error, index) => (
                       <li key={index}>{error}</li>
                     ))}
                   </ul>
@@ -59,9 +87,7 @@ export default function SigninForm() {
                     type={showPassword ? "text" : "password"}
                     placeholder="********"
                     autoComplete="current-password"
-                    defaultValue={
-                      state?.formData?.get("password")?.toString() ?? ""
-                    }
+                    defaultValue={user.password}
                     disabled={isPending}
                     required
                   />
@@ -81,25 +107,34 @@ export default function SigninForm() {
                   </Button>
                 </div>
                 <div className="flex">
-                  {state?.fieldError?.password && (
+                  {error?.password && (
                     <ol className="text-red-500 text-sm">
-                      Password must:
-                      {state.fieldError.password.map((error, index) => (
+                      Password must contain:
+                      {error.password.map((error, index) => (
                         <li key={index} className="pl-2">
                           - {error}
                         </li>
                       ))}
                     </ol>
                   )}
-                  <Link href="/forgot-password" className="ml-auto text-sm p-1">
+                  <Link
+                    href="/auth/forgot-password"
+                    className="ml-auto text-sm p-1 hover:underline"
+                  >
                     Forgot password?
                   </Link>
                 </div>
               </div>
-              {state?.authError && (
+              {state?.error && (
                 <div className="bg-destructive/20 p-3 rounded-md flex items-center gap-x-2 text-sm text-red-500 border">
                   <CircleAlert />
-                  <p>{state.authError}</p>
+                  <p>{state.error}</p>
+                </div>
+              )}
+              {state?.success && (
+                <div className="bg-green-500/20 p-3 rounded-md flex items-center gap-x-2 text-sm text-green-500 border">
+                  <UserRoundCheck />
+                  <p>{state.success}</p>
                 </div>
               )}
               <Button type="submit" disabled={isPending}>
