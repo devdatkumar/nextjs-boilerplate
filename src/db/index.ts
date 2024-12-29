@@ -17,6 +17,7 @@ const client = postgres(connectionString, {
 export const db = drizzle(client, {
   schema,
   logger: process.env.NODE_ENV !== "production",
+  casing: "snake_case",
 });
 
 export const closeDbConnection = () => {
