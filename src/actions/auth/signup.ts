@@ -2,7 +2,7 @@
 
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
-import { signupSchema } from "@/lib/types/auth";
+import { signupSchema } from "@/lib/types/auth-schema";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { generateToken } from "@/lib/auth/generate-token";
@@ -52,7 +52,7 @@ export async function signupAction(_prevState: unknown, formData: FormData) {
     const emailSent = await mailVerifyEmailToken(
       newUser.name,
       newUser.email,
-      verificationToken,
+      verificationToken
     );
 
     if (!emailSent) {

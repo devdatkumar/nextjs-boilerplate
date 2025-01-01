@@ -13,7 +13,7 @@ import {
   LogIn,
 } from "lucide-react";
 import { resetPasswordAction } from "@/actions/auth/reset-password";
-import { resetPasswordSchema } from "@/lib/types/auth";
+import { resetPasswordSchema } from "@/lib/types/auth-schema";
 import { useSearchParams } from "next/navigation";
 
 type FieldError = {

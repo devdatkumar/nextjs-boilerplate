@@ -11,7 +11,7 @@ export default function Page() {
       <Tabs defaultValue="signup" className="w-[400px]">
         <div className="inline-flex items-center justify-center rounded-lg bg-muted text-muted-foreground w-full">
           <Button asChild variant={"ghost"} className="w-1/2 h-8">
-            <Link href="/auth/signin">Sign in</Link>
+            <Link href="/signin">Sign in</Link>
           </Button>
           <Button variant={"outline"} className="w-1/2 text-foreground h-8">
             Sign up

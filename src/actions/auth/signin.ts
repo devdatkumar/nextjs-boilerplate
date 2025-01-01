@@ -5,7 +5,7 @@ import bcryptjs from "bcryptjs";
 import { AuthError } from "next-auth";
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import { signinSchema } from "@/lib/types/auth";
+import { signinSchema } from "@/lib/types/auth-schema";
 import { generateToken } from "@/lib/auth/generate-token";
 import { mailVerifyEmailToken } from "@/lib/auth/mail-verify-email-token";
 import { signIn } from "@/auth";
@@ -49,7 +49,7 @@ export async function signinAction(_prevState: unknown, formData: FormData) {
       const emailSent = await mailVerifyEmailToken(
         user.name,
         user.email,
-        verificationToken,
+        verificationToken
       );
 
       if (!emailSent) {

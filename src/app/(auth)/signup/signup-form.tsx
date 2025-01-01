@@ -2,7 +2,6 @@
 
 import React, { useActionState, useState } from "react";
 import Form from "next/form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,7 +14,7 @@ import {
   UserRoundCheck,
 } from "lucide-react";
 import { signupAction } from "@/actions/auth/signup";
-import { signupSchema } from "@/lib/types/auth";
+import { signupSchema } from "@/lib/types/auth-schema";
 
 type FieldError = {
   name?: string[] | undefined;

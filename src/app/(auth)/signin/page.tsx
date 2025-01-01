@@ -15,7 +15,7 @@ export default function Page() {
             Sign in
           </Button>
           <Button asChild variant={"ghost"} className="w-1/2 h-8">
-            <Link href="/auth/signup">Sign up</Link>
+            <Link href="/signup">Sign up</Link>
           </Button>
         </div>
         <TabsContent value="signin">

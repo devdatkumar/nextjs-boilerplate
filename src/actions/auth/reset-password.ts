@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users, verificationTokens } from "@/db/schema";
-import { resetPasswordSchema } from "@/lib/types/auth";
+import { resetPasswordSchema } from "@/lib/types/auth-schema";
 
 type Payload = {
   formData: FormData;
@@ -13,12 +13,12 @@ type Payload = {
 
 export async function resetPasswordAction(
   _prevState: unknown,
-  payload: Payload,
+  payload: Payload
 ) {
   // Validate data
   const { formData, email, token } = payload;
   const validationResult = resetPasswordSchema.safeParse(
-    Object.fromEntries(formData),
+    Object.fromEntries(formData)
   );
 
   if (!validationResult.success) {

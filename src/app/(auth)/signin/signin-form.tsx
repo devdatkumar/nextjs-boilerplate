@@ -15,7 +15,7 @@ import {
   UserRoundCheck,
 } from "lucide-react";
 import { signinAction } from "@/actions/auth/signin";
-import { signinSchema } from "@/lib/types/auth";
+import { signinSchema } from "@/lib/types/auth-schema";
 
 type FieldError = {
   email?: string[] | undefined;
@@ -108,7 +108,7 @@ export default function SigninForm() {
               </ol>
             )}
             <Link
-              href="/auth/forgot-password"
+              href="/forgot-password"
               className="ml-auto text-sm p-1 hover:underline"
             >
               Forgot password?

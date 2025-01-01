@@ -16,7 +16,7 @@ export default function Page() {
           <ForgotPasswordForm />
           <hr className="my-4" />
           <Button asChild variant={"outline"}>
-            <Link href={"/auth/signin"}>
+            <Link href={"/signin"}>
               <ArrowLeft size={20} />
               Sign in
             </Link>
