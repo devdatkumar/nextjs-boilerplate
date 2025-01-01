@@ -1,8 +1,9 @@
 "use client";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import SignupForm from "@/components/form/signup";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import SignupForm from "./signup-form";
 
 export default function Page() {
   return (
@@ -17,7 +18,14 @@ export default function Page() {
           </Button>
         </div>
         <TabsContent value="signup">
-          <SignupForm />
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl">Sign up</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <SignupForm />
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
