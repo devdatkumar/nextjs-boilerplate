@@ -2,9 +2,6 @@
 
 import React, { useActionState, useState } from "react";
 import Form from "next/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   CircleAlert,
   Eye,
@@ -13,6 +10,9 @@ import {
   LogIn,
   UserRoundCheck,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { signupAction } from "@/actions/auth/signup";
 import { signupSchema } from "@/lib/types/auth-schema";
 

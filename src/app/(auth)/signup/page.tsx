@@ -8,7 +8,7 @@ import SignupForm from "./signup-form";
 export default function Page() {
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
-      <Tabs defaultValue="signup" className="w-[400px]">
+      <Tabs defaultValue="signup" className="w-96">
         <div className="inline-flex items-center justify-center rounded-lg bg-muted text-muted-foreground w-full">
           <Button asChild variant={"ghost"} className="w-1/2 h-8">
             <Link href="/signin">Sign in</Link>

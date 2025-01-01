@@ -2,15 +2,15 @@
 
 import React, { useActionState } from "react";
 import Form from "next/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   CircleAlert,
   LoaderPinwheel,
   LogIn,
   UserRoundCheck,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { forgotPasswordAction } from "@/actions/auth/forgot-password";
 
 export default function ForgotPasswordForm() {
@@ -21,7 +21,7 @@ export default function ForgotPasswordForm() {
 
   return (
     <Form action={dispatch}>
-      <div className="grid gap-4 w-[400]">
+      <div className="grid gap-4">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
           <Input

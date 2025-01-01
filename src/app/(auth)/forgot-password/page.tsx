@@ -8,7 +8,7 @@ import ForgotPasswordForm from "./forgot-password-form";
 export default function Page() {
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
-      <Card>
+      <Card className="w-96">
         <CardHeader>
           <CardTitle className="text-2xl">Forgot Password</CardTitle>
         </CardHeader>

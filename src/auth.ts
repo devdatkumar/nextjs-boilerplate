@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { type Adapter } from "next-auth/adapters";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import authConfig from "./auth.config";
 import { db } from "@/db/index";
 import * as schema from "@/db/schema";

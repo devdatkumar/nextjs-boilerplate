@@ -1,16 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import VerifyEmailForm from "./verify-email-form";
-import { Suspense } from "react";
 
 export default function Page() {
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
-      <Card className="w-[400]">
+      <Card className="w-96">
         <CardHeader>
           <CardTitle className="text-2xl">Verify Email</CardTitle>
         </CardHeader>

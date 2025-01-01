@@ -23,7 +23,7 @@ export default function VerifyEmailForm() {
 
   return (
     <Form action={handleAction}>
-      <div className="grid gap-4 w-full">
+      <div className="grid gap-4">
         <Button type="submit" disabled={isPending}>
           {isPending && <LoaderPinwheel className="animate-spin" />}
           <LogIn />

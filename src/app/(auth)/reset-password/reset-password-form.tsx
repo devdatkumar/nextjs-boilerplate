@@ -2,9 +2,7 @@
 
 import React, { useActionState, useState } from "react";
 import Form from "next/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useSearchParams } from "next/navigation";
 import {
   CircleAlert,
   Eye,
@@ -12,9 +10,11 @@ import {
   LoaderPinwheel,
   LogIn,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { resetPasswordAction } from "@/actions/auth/reset-password";
 import { resetPasswordSchema } from "@/lib/types/auth-schema";
-import { useSearchParams } from "next/navigation";
 
 type FieldError = {
   password?: string[] | undefined;
@@ -53,7 +53,7 @@ export default function ResetPasswordForm() {
 
   return (
     <Form action={handleAction}>
-      <div className="grid gap-4 w-[400]">
+      <div className="grid gap-4">
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
           <div className="flex gap-x-1">

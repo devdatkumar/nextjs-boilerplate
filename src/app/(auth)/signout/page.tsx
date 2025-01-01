@@ -1,12 +1,12 @@
+import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LogOut } from "lucide-react";
 import { signOut } from "@/auth";
 
 export default async function Page() {
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
-      <Card className="w-full max-w-md">
+      <Card className="w-96">
         <CardHeader>
           <CardTitle className="text-2xl">Sign Out</CardTitle>
         </CardHeader>
