@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ResetPasswordForm from "./reset-password-form";
+import { Suspense } from "react";
 
 export default function Page() {
   return (
@@ -13,7 +14,9 @@ export default function Page() {
           <CardTitle className="text-2xl">Reset Password</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResetPasswordForm />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ResetPasswordForm />
+          </Suspense>
           <hr className="my-4" />
           <div className="flex justify-between">
             <Button asChild variant={"outline"}>

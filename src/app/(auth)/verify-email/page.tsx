@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import VerifyEmailForm from "./verify-email-form";
+import { Suspense } from "react";
 
 export default function Page() {
   return (
@@ -14,7 +15,9 @@ export default function Page() {
           <CardTitle className="text-2xl">Verify Email</CardTitle>
         </CardHeader>
         <CardContent>
-          <VerifyEmailForm />
+          <Suspense fallback={<div>Loading...</div>}>
+            <VerifyEmailForm />
+          </Suspense>
           <hr className="my-4" />
           <Button asChild variant={"outline"}>
             <Link href={"/signin"}>
