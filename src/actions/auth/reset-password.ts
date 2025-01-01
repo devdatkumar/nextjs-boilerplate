@@ -13,12 +13,12 @@ type Payload = {
 
 export async function resetPasswordAction(
   _prevState: unknown,
-  payload: Payload
+  payload: Payload,
 ) {
   // Validate data
   const { formData, email, token } = payload;
   const validationResult = resetPasswordSchema.safeParse(
-    Object.fromEntries(formData)
+    Object.fromEntries(formData),
   );
 
   if (!validationResult.success) {

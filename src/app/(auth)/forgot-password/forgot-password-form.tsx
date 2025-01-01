@@ -16,7 +16,7 @@ import { forgotPasswordAction } from "@/actions/auth/forgot-password";
 export default function ForgotPasswordForm() {
   const [state, dispatch, isPending] = useActionState(
     forgotPasswordAction,
-    undefined
+    undefined,
   );
 
   return (

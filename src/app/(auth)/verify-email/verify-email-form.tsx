@@ -11,7 +11,7 @@ export default function VerifyEmailForm() {
   const searchParams = useSearchParams();
   const [state, dispatch, isPending] = useActionState(
     verifyEmailAction,
-    undefined
+    undefined,
   );
 
   const handleAction = () => {

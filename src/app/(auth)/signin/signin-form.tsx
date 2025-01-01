@@ -30,7 +30,7 @@ export default function SigninForm() {
 
   const handleAction = (formData: FormData) => {
     const validationResult = signinSchema.safeParse(
-      Object.fromEntries(formData)
+      Object.fromEntries(formData),
     );
 
     if (!validationResult.success) {

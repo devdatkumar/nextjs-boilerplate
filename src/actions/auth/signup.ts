@@ -52,7 +52,7 @@ export async function signupAction(_prevState: unknown, formData: FormData) {
     const emailSent = await mailVerifyEmailToken(
       newUser.name,
       newUser.email,
-      verificationToken
+      verificationToken,
     );
 
     if (!emailSent) {

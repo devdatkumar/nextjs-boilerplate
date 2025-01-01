@@ -9,11 +9,11 @@ import { forgotPasswordSchema } from "@/lib/types/auth-schema";
 
 export async function forgotPasswordAction(
   _prevState: unknown,
-  formData: FormData
+  formData: FormData,
 ) {
   // Validate data
   const validationResult = forgotPasswordSchema.safeParse(
-    Object.fromEntries(formData)
+    Object.fromEntries(formData),
   );
 
   if (!validationResult.success) {
@@ -41,7 +41,7 @@ export async function forgotPasswordAction(
     const emailSent = await mailResetPasswordToken(
       user.name,
       user.email,
-      resetToken
+      resetToken,
     );
 
     if (!emailSent) {

@@ -30,7 +30,7 @@ export default function SignupForm() {
 
   const handleAction = (formData: FormData) => {
     const validationResult = signupSchema.safeParse(
-      Object.fromEntries(formData)
+      Object.fromEntries(formData),
     );
 
     if (!validationResult.success) {

@@ -27,12 +27,12 @@ export default function ResetPasswordForm() {
   const searchParams = useSearchParams();
   const [state, dispatch, isPending] = useActionState(
     resetPasswordAction,
-    undefined
+    undefined,
   );
 
   const handleAction = (formData: FormData) => {
     const validationResult = resetPasswordSchema.safeParse(
-      Object.fromEntries(formData)
+      Object.fromEntries(formData),
     );
 
     if (!validationResult.success) {

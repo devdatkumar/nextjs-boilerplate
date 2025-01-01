@@ -49,7 +49,7 @@ export async function signinAction(_prevState: unknown, formData: FormData) {
       const emailSent = await mailVerifyEmailToken(
         user.name,
         user.email,
-        verificationToken
+        verificationToken,
       );
 
       if (!emailSent) {
