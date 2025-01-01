@@ -11,7 +11,7 @@ import Apple from "next-auth/providers/apple";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
-import { signinSchema } from "@/lib/types/auth";
+import { signinSchema } from "@/lib/types/auth-schema";
 import { db } from "./db";
 import { users } from "./db/schema";
 
@@ -40,8 +40,8 @@ class CustomError extends CredentialsSignin {
 
 const authConfig: NextAuthConfig = {
   pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signout",
+    signIn: "/signin",
+    signOut: "/signout",
   },
   secret: process.env.AUTH_SECRET,
   session: { strategy: "jwt", maxAge: 24 * 60 * 60 },
@@ -125,31 +125,23 @@ const authConfig: NextAuthConfig = {
       const DEFAULT_URL = "/";
       const isApiRoute = nextUrl.pathname.startsWith("/api/");
       const isAuthRoute = [
-        "/auth/signin",
-        "/auth/signup",
-        "/auth/verify-email",
-        "/auth/forgot-password",
-        "/auth/reset-password",
+        "/signin",
+        "/signup",
+        "/verify-email",
+        "/forgot-password",
+        "/reset-password",
       ].includes(nextUrl.pathname);
       const isPublicRoute = [
         "/",
         "/error",
+        "/signout",
         "/about",
         "/contact",
-        "/auth/signout",
-        "/auth/error",
       ].includes(nextUrl.pathname);
       const isAdminRoute = ["/protected"].includes(nextUrl.pathname);
 
       const isAdmin = auth?.user?.role === "ADMIN";
       const isLoggedIn = !!auth?.user;
-
-      if (nextUrl.pathname === "/auth" || nextUrl.pathname === "/signin") {
-        return Response.redirect(new URL("/auth/signin", nextUrl));
-      }
-      if (nextUrl.pathname === "/signout") {
-        return Response.redirect(new URL("/auth/signout", nextUrl));
-      }
 
       if (isLoggedIn) {
         // If loggedin, redirect to Default_url for auth routes
@@ -168,7 +160,7 @@ const authConfig: NextAuthConfig = {
       }
 
       // Redirect to signin page with callbackUrl for protected routes
-      const signInUrl = new URL("/auth/signin", nextUrl);
+      const signInUrl = new URL("/signin", nextUrl);
       signInUrl.searchParams.set("callbackUrl", nextUrl.pathname);
       return Response.redirect(signInUrl);
     },

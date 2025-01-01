@@ -2,7 +2,6 @@
 
 import React, { useActionState, useState } from "react";
 import Form from "next/form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,86 +11,49 @@ import {
   EyeClosed,
   LoaderPinwheel,
   LogIn,
-  UserRoundCheck,
 } from "lucide-react";
-import { signupAction } from "@/actions/auth/signup";
-import { signupSchema } from "@/lib/types/auth";
+import { resetPasswordAction } from "@/actions/auth/reset-password";
+import { resetPasswordSchema } from "@/lib/types/auth-schema";
+import { useSearchParams } from "next/navigation";
 
 type FieldError = {
-  name?: string[] | undefined;
-  email?: string[] | undefined;
   password?: string[] | undefined;
 };
 
-export default function SignupForm() {
+export default function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [user, setUser] = useState({ password: "" });
   const [error, setError] = useState<FieldError | undefined>({});
-  const [state, dispatch, isPending] = useActionState(signupAction, undefined);
+  const searchParams = useSearchParams();
+  const [state, dispatch, isPending] = useActionState(
+    resetPasswordAction,
+    undefined
+  );
 
   const handleAction = (formData: FormData) => {
-    const validationResult = signupSchema.safeParse(
+    const validationResult = resetPasswordSchema.safeParse(
       Object.fromEntries(formData)
     );
 
     if (!validationResult.success) {
       setError(validationResult.error.flatten().fieldErrors);
       setUser({
-        name: formData.get("name")?.toString() ?? "",
-        email: formData.get("email")?.toString() ?? "",
         password: formData.get("password")?.toString() ?? "",
       });
       return;
     }
 
+    const email = searchParams.get("email") ?? "";
+    const token = searchParams.get("token") ?? "";
+
     setError({});
-    dispatch(formData);
-    setUser({ name: "", email: "", password: "" });
+    dispatch({ formData, email, token });
+    setUser({ password: "" });
   };
 
   return (
     <Form action={handleAction}>
-      <div className="grid gap-4">
-        <div className="grid gap-2">
-          <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            placeholder="Full Name"
-            defaultValue={user.name}
-            disabled={isPending}
-            required
-          />
-          {error?.name && (
-            <ul className="text-red-500 text-sm">
-              {error.name.map((error, index) => (
-                <li key={index}>{error}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="example@email.com"
-            defaultValue={user.email}
-            disabled={isPending}
-            required
-          />
-          {error?.email && (
-            <ul className="text-red-500 text-sm">
-              {error.email.map((error, index) => (
-                <li key={index}>{error}</li>
-              ))}
-            </ul>
-          )}
-        </div>
+      <div className="grid gap-4 w-[400]">
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
           <div className="flex gap-x-1">
@@ -118,18 +80,16 @@ export default function SignupForm() {
               {showPassword ? <Eye /> : <EyeClosed />}
             </Button>
           </div>
-          <div>
-            {error?.password && (
-              <ol className="text-red-500 text-sm">
-                Password must contain:
-                {error.password.map((error, index) => (
-                  <li key={index} className="pl-2">
-                    - {error}
-                  </li>
-                ))}
-              </ol>
-            )}
-          </div>
+          {error?.password && (
+            <ol className="text-red-500 text-sm">
+              Password must contain:
+              {error.password.map((error, index) => (
+                <li key={index} className="pl-2">
+                  - {error}
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
         {state?.error && (
           <div className="bg-destructive/20 p-3 rounded-md flex items-center gap-x-2 text-sm text-red-500 border">
@@ -139,14 +99,14 @@ export default function SignupForm() {
         )}
         {state?.success && (
           <div className="bg-green-500/20 p-3 rounded-md flex items-center gap-x-2 text-sm text-green-500 border">
-            <UserRoundCheck />
+            <CircleAlert />
             <p>{state.success}</p>
           </div>
         )}
         <Button type="submit" disabled={isPending}>
           {isPending && <LoaderPinwheel className="animate-spin" />}
           <LogIn />
-          Sign up
+          Reset Password
         </Button>
       </div>
     </Form>

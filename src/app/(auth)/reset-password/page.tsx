@@ -1,9 +1,9 @@
 "use client";
-import ResetPasswordForm from "@/app/auth/reset-password/reset-password-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import ResetPasswordForm from "./reset-password-form";
 
 export default function Page() {
   return (
@@ -17,13 +17,13 @@ export default function Page() {
           <hr className="my-4" />
           <div className="flex justify-between">
             <Button asChild variant={"outline"}>
-              <Link href={"/auth/forgot-password"}>
+              <Link href={"/forgot-password"}>
                 <ArrowLeft size={20} />
                 Forgot password
               </Link>
             </Button>
             <Button asChild variant={"outline"}>
-              <Link href={"/auth/signin"}>
+              <Link href={"/signin"}>
                 Sign in
                 <ArrowRight size={20} />
               </Link>
