@@ -2,7 +2,9 @@
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import SigninForm from "@/components/form/signin";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import SigninForm from "./signin-form";
+import OAuthForm from "./oauth-form";
 
 export default function Page() {
   return (
@@ -17,7 +19,27 @@ export default function Page() {
           </Button>
         </div>
         <TabsContent value="signin">
-          <SigninForm />
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl">Sign in</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-6">
+                <SigninForm />
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or continue with
+                    </span>
+                  </div>
+                </div>
+                <OAuthForm />
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
